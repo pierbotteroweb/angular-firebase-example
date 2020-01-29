@@ -10,6 +10,7 @@ export class ContatoDataService {
     contato: null,
     key: ''
   })
+  currentContato = this.contatoSource.asObservable()
 
   constructor() { }
 

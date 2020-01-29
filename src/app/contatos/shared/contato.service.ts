@@ -30,6 +30,7 @@ export class ContatoService {
     .pipe(
       map(changes =>{
         return changes.map(c => ({
+          // key: c.payload.key, ...c.payload.exportVal()
           key: c.payload.key, ...c.payload.val()
         }))
       })
