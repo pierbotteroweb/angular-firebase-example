@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ContatoService {
+  
+  items: any;
 
   constructor(private db: AngularFireDatabase) { }
 
@@ -26,15 +28,22 @@ export class ContatoService {
 
   getAll(){
     this.db.list('contato')
-    .snapshotChanges()
-    .pipe(
-      map(changes =>{
-        return changes.map(c => ({
-          // key: c.payload.key, ...c.payload.exportVal()
-          key: c.payload.key, ...c.payload.val()
-        }))
-      })
-    )
+    .valueChanges()
+    .subscribe(val => {
+      this.items = val;
+      console.log("Valores",val);
+    });
+
+
+    // .snapshotChanges()
+    // .pipe(
+    //   map(changes =>{
+    //     return changes.map(c => ({
+    //       // key: c.payload.key, ...c.payload.exportVal()
+    //       key: c.payload.key, ...c.payload.val()
+    //     }))
+    //   })
+    // )
   
 
   }
