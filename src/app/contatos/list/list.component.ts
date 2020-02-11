@@ -3,6 +3,7 @@ import { Contato } from "../shared/contato";
 import { ContatoService } from "../shared/contato.service";
 import { ContatoDataService } from "../shared/contato-data.service";
 import { Observable } from "rxjs";
+import { FinalService } from "../shared/final.service";
 
 @Component({
   selector: 'app-list',
@@ -15,10 +16,15 @@ export class ListComponent implements OnInit {
 
   constructor(
     private contatoService: ContatoService,
-    private contatoDataService: ContatoDataService) { }
+    private contatoDataService: ContatoDataService,    
+    private myFinal: FinalService) { }
 
   ngOnInit() {
-    this.contatos = this.contatoService.getAll()
+    this.contatoService.getAll()
+    FinalService.infoTransmitida.subscribe(
+      info => this.contatos = info
+    )
+    
   }
 
   delete(key: string){

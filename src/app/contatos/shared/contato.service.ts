@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Contato } from './contato';
 import { AngularFireDatabase } from "@angular/fire/database";
 import { map } from 'rxjs/operators';
+import { FinalService } from "./final.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class ContatoService {
   
   items: any;
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+    private myFinal: FinalService) { }
 
   insert(contato: Contato){
     this.db.list('contato').push(contato)
@@ -31,7 +33,8 @@ export class ContatoService {
     .valueChanges()
     .subscribe(val => {
       this.items = val;
-      console.log("Valores",val);
+      // console.log("Valores",val);
+      this.myFinal.alteraInfo(this.items)
     });
 
 

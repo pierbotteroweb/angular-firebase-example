@@ -11,6 +11,7 @@ import { environment } from "../environments/environment";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { EditComponent } from './contatos/edit/edit.component';
 import { ListComponent } from './contatos/list/list.component';
+import { FinalService } from "./contatos/shared/final.service";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { ListComponent } from './contatos/list/list.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [FinalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
